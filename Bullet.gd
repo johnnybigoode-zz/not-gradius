@@ -7,3 +7,7 @@ func _ready():
 
 func _process(delta):
 	position += Vector2(0,delta * speed)
+
+
+func _on_Area2D_area_entered(area):
+	print(area)

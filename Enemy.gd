@@ -8,6 +8,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	position = Vector2(300,300)
 	pass # Replace with function body.
 
 
@@ -17,5 +18,6 @@ func _ready():
 
 
 func _on_Area2D_area_entered(area):
+	print(area)
 	position += Vector2(900,900)
 	pass # Replace with function body.
