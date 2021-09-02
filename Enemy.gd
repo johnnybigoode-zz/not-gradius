@@ -1,23 +1,28 @@
 extends Node2D
 
+onready var Global = get_node("/root/Global")
+var speed = 200
+var width = 800
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	position = Vector2(300,300)
-	pass # Replace with function body.
+	Global.score += 0
 
+func do_movement(delta):
+	position += Vector2(speed*delta,0)
+	if (position.x > width):
+		speed = -speed
+		position += Vector2(speed*delta,0)
+	if (position.x < 0):
+		speed = -speed
+		position += Vector2(speed*delta,0)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+func _process(delta):
+	do_movement(delta)
 
 func _on_Area2D_area_entered(area):
-	print(area)
-	position += Vector2(900,900)
-	pass # Replace with function body.
+	if(area.is_in_group("Bullet")):
+		area.get_parent().queue_free()
+		self.queue_free()
+		Global.score += 1
+		print(Global.score)
+		

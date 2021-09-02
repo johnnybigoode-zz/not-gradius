@@ -1,14 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Shooter.gd" type="Script" id=1]
 [ext_resource path="res://Bullet.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Enemy.gd" type="Script" id=3]
-
-[sub_resource type="RectangleShape2D" id=1]
-
-[sub_resource type="RectangleShape2D" id=2]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MainRoot.gd" type="Script" id=4]
 
 [node name="MainRoot" type="Node2D"]
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 300.0 ],
 "_edit_vertical_guides_": [ 512.0 ]
@@ -27,6 +25,7 @@ __meta__ = {
 }
 
 [node name="Shooter" type="Node2D" parent="."]
+position = Vector2( 0, -100 )
 script = ExtResource( 1 )
 
 [node name="Ship" type="ColorRect" parent="Shooter"]
@@ -37,31 +36,7 @@ __meta__ = {
 }
 
 [node name="Bullet" parent="." instance=ExtResource( 2 )]
+position = Vector2( -100, 0 )
 
-[node name="Area2D" type="Area2D" parent="Bullet"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet/Area2D"]
-shape = SubResource( 1 )
-
-[node name="Enemy" type="Node2D" parent="."]
-script = ExtResource( 3 )
-
-[node name="ColorRect" type="ColorRect" parent="Enemy"]
-margin_right = 40.0
-margin_bottom = 40.0
-color = Color( 1, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Area2D" type="Area2D" parent="Enemy"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Area2D"]
-position = Vector2( 20, 20 )
-scale = Vector2( 2, 2 )
-shape = SubResource( 2 )
-
-[connection signal="area_entered" from="Bullet/Area2D" to="Bullet" method="_on_Area2D_area_entered"]
-[connection signal="area_entered" from="Enemy/Area2D" to="Enemy" method="_on_Area2D_area_entered"]
-
-[editable path="Bullet"]
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -50 )
