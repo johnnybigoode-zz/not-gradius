@@ -1,20 +1,22 @@
 extends Node2D
 
 onready var Global = get_node("/root/Global")
-var speed = 200
+var speed = Vector2(200,50)
 var width = 800
 
 func _ready():
 	Global.score += 0
+	for c in get_children():
+		c.add_to_group("Enemy")
 
 func do_movement(delta):
-	position += Vector2(speed*delta,0)
+	position += speed*delta
 	if (position.x > width):
-		speed = -speed
-		position += Vector2(speed*delta,0)
+		speed.x = -speed.x
+		position += speed*delta
 	if (position.x < 0):
-		speed = -speed
-		position += Vector2(speed*delta,0)
+		speed.x = -speed.x
+		position += speed*delta
 
 func _process(delta):
 	do_movement(delta)
