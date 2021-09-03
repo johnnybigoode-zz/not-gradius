@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Shooter.gd" type="Script" id=1]
 [ext_resource path="res://Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://MainRoot.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
 
 [node name="MainRoot" type="Node2D"]
 script = ExtResource( 4 )
@@ -35,8 +37,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Area2D" type="Area2D" parent="Shooter"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shooter/Area2D"]
+position = Vector2( 20, 20 )
+scale = Vector2( 2, 2 )
+shape = SubResource( 1 )
+
 [node name="Bullet" parent="." instance=ExtResource( 2 )]
 position = Vector2( -100, 0 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -50 )
+
+[connection signal="area_entered" from="Shooter/Area2D" to="Shooter" method="_on_Area2D_area_entered"]

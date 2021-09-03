@@ -1,6 +1,6 @@
 extends Node2D
 
-const speed = 300
+const speed = 400
 var Bullet = load("res://Bullet.tscn")
 var hasShot = 0
 var shipWidth = 40
@@ -22,3 +22,9 @@ func _process(delta):
 			get_parent().add_child(b)
 
 	hasShot -= 1
+
+
+func _on_Area2D_area_entered(area):
+	if(area.is_in_group("Enemy")):
+		area.get_parent().queue_free()
+		self.queue_free()
