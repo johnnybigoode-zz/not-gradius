@@ -7,7 +7,6 @@ var Bullet = load("res://Bullet.tscn")
 var shoot_delay = 0.5
 
 func _ready():
-	position = Vector2(400,200)
 	shoot_timer()
 
 func do_movement(delta):
@@ -19,6 +18,7 @@ func try_shoot():
 		var position_to_aim = player.position - Vector2(-20,0)
 		var direction = (position_to_aim - self.position).normalized()
 		var b = Bullet.instance()
+		b.set_children_group("EnemyBullet")
 		b.direction = direction
 		b.position = Vector2(get_position()) + Vector2(0,30)
 		b.speed = -0.5*(b.speed)
@@ -37,6 +37,8 @@ func shoot_timer():
 	timer.start()
 
 func _process(delta):
+	if(position.y > 600):
+		self.queue_free()
 	do_movement(delta)
 	set_global_rotation_degrees(get_global_rotation_degrees() + rotation_speed*delta)
 	try_shoot()

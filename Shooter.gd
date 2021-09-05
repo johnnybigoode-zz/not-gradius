@@ -32,7 +32,7 @@ func _process(delta):
 
 
 func _on_Area2D_area_entered(area):
-	if(area.is_in_group("Enemy") || area.is_in_group("Bullet")):
+	if(area.is_in_group("Enemy") || area.is_in_group("EnemyBullet")):
 		area.get_parent().queue_free()
 		self.queue_free()
 	
