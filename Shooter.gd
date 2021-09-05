@@ -3,7 +3,7 @@ extends Node2D
 var Bullet = load("res://Bullet.tscn")
 onready var Global = get_node("/root/Global")
 
-const speed = 400
+const speed = 600
 var hasShot = 0
 var shipWidth = 40
 # Called when the node enters the scene tree for the first time.
@@ -16,7 +16,7 @@ func _process(delta):
 	if Input.is_action_pressed("ui_right"):
 		position += Vector2(delta * speed,0)
 		
-	position.x = clamp(position.x, Global.left_border_x, Global.right_border_x-shipWidth)
+	position.x = clamp(position.x, Global.left_border_x-(shipWidth/4), Global.right_border_x-(shipWidth-shipWidth/4))
 	if Input.is_action_pressed("ui_accept"):
 		if(hasShot <= 0):
 			hasShot = 10

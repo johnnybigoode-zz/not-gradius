@@ -1,7 +1,9 @@
 extends Node2D
 
 var Enemy = load("res://Enemy.tscn")
+var SmallerEnemy = load("res://SmallerEnemy.tscn")
 var Border = load("res://Borders.tscn")
+
 onready var Global = get_node("/root/Global")
 
 var timer = null
@@ -29,14 +31,18 @@ func enemy_factory():
 	timer.connect("timeout", self, "spawn_enemy")
 	timer.start()
 	
-var spawn_list = ["spawn_single_enemy","spawn_five_enemies"]	
+var spawn_list = ["spawn_several_small_enemies","spawn_five_enemies"]	
+
+func spawn_several_small_enemies():
+	for n in 25:
+		spawn_single_enemy(SmallerEnemy)
 
 func spawn_five_enemies():
 	for n in 5:
-		spawn_single_enemy()
+		spawn_single_enemy(Enemy)
 
-func spawn_single_enemy():
-	var e = Enemy.instance()
+func spawn_single_enemy(type_to_spawn):
+	var e = type_to_spawn.instance()
 	var row = int(rand_range(0, 3)) * row_width
 	var spawn_x_pos = clamp(rand_range(0, 600),Global.left_border_x,Global.right_border_x)
 	var randHorizontalPos = Vector2(spawn_x_pos,row+20)
