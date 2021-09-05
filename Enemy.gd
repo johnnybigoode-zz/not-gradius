@@ -3,6 +3,7 @@ extends Node2D
 onready var Global = get_node("/root/Global")
 var speed = Vector2(200,50)
 var width = 800
+var current_rotation = 1
 
 func _ready():
 	Global.score += 0
@@ -18,7 +19,13 @@ func do_movement(delta):
 		speed.x = -speed.x
 		position += speed*delta
 
+func rotation():
+	if rad2deg( speed.angle()) < 90 :
+		speed = speed.rotated(deg2rad(current_rotation))
+	
+
 func _process(delta):
+	rotation()
 	do_movement(delta)
 
 func _on_Area2D_area_entered(area):
