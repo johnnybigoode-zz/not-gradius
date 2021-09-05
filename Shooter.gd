@@ -26,11 +26,13 @@ func _process(delta):
 			var b = Bullet.instance()
 			b.position = Vector2(get_position()) + Vector2(shipWidth/2,0)
 			get_parent().add_child(b)
+			b.set_color(bullet_color)
 
 	hasShot -= 1
 
 
 func _on_Area2D_area_entered(area):
-	if(area.is_in_group("Enemy")):
+	if(area.is_in_group("Enemy") || area.is_in_group("Bullet")):
 		area.get_parent().queue_free()
 		self.queue_free()
+	
