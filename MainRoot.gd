@@ -2,12 +2,13 @@ extends Node2D
 
 var Enemy = load("res://Enemy.tscn")
 var SmallerEnemy = load("res://SmallerEnemy.tscn")
+var SpinEnemy = load("res://SpinEnemy.tscn")
 var Border = load("res://Borders.tscn")
 
 onready var Global = get_node("/root/Global")
 
 var timer = null
-var enemy_delay = 5
+var enemy_delay = 1
 var row_width = 60
 
 # Called when the node enters the scene tree for the first time.
@@ -29,9 +30,13 @@ func enemy_factory():
 	add_child(timer)
 	timer.set_wait_time(enemy_delay)
 	timer.connect("timeout", self, "spawn_enemy")
-	timer.start()
+	timer.start()	
 	
-var spawn_list = ["spawn_several_small_enemies","spawn_five_enemies"]	
+var spawn_list = ["spawn_three_spinners","spawn_several_small_enemies","spawn_five_enemies","spawn_three_spinners"]
+
+func spawn_three_spinners():
+	for n in 25:
+		spawn_single_enemy(SpinEnemy)
 
 func spawn_several_small_enemies():
 	for n in 25:
