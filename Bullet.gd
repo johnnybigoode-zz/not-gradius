@@ -1,13 +1,22 @@
 extends Node2D
 
-const speed = -750
+var speed = -750
+var child_color_rect = null
+var direction = Vector2(0,1).normalized()
 
 func _ready():
 	for c in get_children():
+		if c is ColorRect:
+			child_color_rect = c
+			
 		c.add_to_group("Bullet")
 
+func set_color(color):
+	child_color_rect.color = color
+	#Color( 1, 0.08, 0.58, 1 )
+
 func _process(delta):
-	position += Vector2(0,delta * speed)
+	position += direction * speed * delta
 	if(position.y < -10):
 		self.queue_free()
 

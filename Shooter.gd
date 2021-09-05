@@ -6,6 +6,7 @@ onready var Global = get_node("/root/Global")
 const speed = 600
 var hasShot = 0
 var shipWidth = 40
+var bullet_color = Color( 0, 1, 1, 1 )
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	position =  + Vector2(507,540)
