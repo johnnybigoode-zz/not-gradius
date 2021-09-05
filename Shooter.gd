@@ -11,6 +11,8 @@ func _ready():
 	position =  + Vector2(507,540)
 
 func _process(delta):
+	Global.player = self
+	
 	if Input.is_action_pressed("ui_left"):
 		position -= Vector2(delta * speed,0)
 	if Input.is_action_pressed("ui_right"):
