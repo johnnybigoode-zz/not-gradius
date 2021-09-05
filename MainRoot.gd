@@ -1,19 +1,19 @@
 extends Node2D
 
+var Enemy = load("res://Enemy.tscn")
 var Border = load("res://Borders.tscn")
 onready var Global = get_node("/root/Global")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+var timer = null
+var enemy_delay = 5
+var row_width = 60
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	add_bounds()
 	enemy_factory()
-	
+
 func add_bounds():
 	var border_left = Border.instance()
 	var border_right = Border.instance()
@@ -29,12 +29,24 @@ func enemy_factory():
 	timer.connect("timeout", self, "spawn_enemy")
 	timer.start()
 	
-func spawn_enemy():
+var spawn_list = ["spawn_single_enemy","spawn_five_enemies"]	
+
+func spawn_five_enemies():
+	for n in 5:
+		spawn_single_enemy()
+
+func spawn_single_enemy():
 	var e = Enemy.instance()
 	var row = int(rand_range(0, 3)) * row_width
-	var randHorizontalPos = Vector2(rand_range(0, 600),row+20)
+	var spawn_x_pos = clamp(rand_range(0, 600),Global.left_border_x,Global.right_border_x)
+	var randHorizontalPos = Vector2(spawn_x_pos,row+20)
 	e.position = randHorizontalPos
 	get_parent().add_child(e)
+
+func spawn_enemy():
+	var get_current = spawn_list.pop_front()	
+	if get_current:
+		call(get_current)
 
 func enemy_died_handler():
 	print("enemy has died")
