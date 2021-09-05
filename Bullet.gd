@@ -5,11 +5,16 @@ var child_color_rect = null
 var direction = Vector2(0,1).normalized()
 
 func _ready():
+	set_children_group("Bullet")
 	for c in get_children():
 		if c is ColorRect:
 			child_color_rect = c
 			
-		c.add_to_group("Bullet")
+		
+
+func set_children_group(g):
+	for c in get_children():
+		c.add_to_group(g)
 
 func set_color(color):
 	child_color_rect.color = color
