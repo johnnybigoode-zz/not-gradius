@@ -4,6 +4,7 @@ onready var Global = get_node("/root/Global")
 var speed = Vector2(200,50)
 var width = 800
 var current_rotation = 1
+var enemyWidth = 40
 
 func _ready():
 	Global.score += 0
@@ -18,6 +19,7 @@ func do_movement(delta):
 	if (position.x < 0):
 		speed.x = -speed.x
 		position += speed*delta
+	position.x = clamp(position.x, Global.left_border_x, Global.right_border_x-enemyWidth)
 
 func rotation():
 	if rad2deg( speed.angle()) < 90 :
