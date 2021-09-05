@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Shooter.gd" type="Script" id=1]
 [ext_resource path="res://Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://MainRoot.gd" type="Script" id=4]
+[ext_resource path="res://Borders.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -11,7 +12,7 @@
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 300.0 ],
-"_edit_vertical_guides_": [ 512.0 ]
+"_edit_vertical_guides_": [ 512.0, 340.786, 682.089 ]
 }
 
 [node name="Background" type="Node2D" parent="."]
@@ -48,6 +49,8 @@ shape = SubResource( 1 )
 position = Vector2( -100, 0 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0, -50 )
+position = Vector2( -300, 700 )
+
+[node name="Borders" parent="." instance=ExtResource( 5 )]
 
 [connection signal="area_entered" from="Shooter/Area2D" to="Shooter" method="_on_Area2D_area_entered"]

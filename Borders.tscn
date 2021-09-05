@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 300 )
+
+[node name="Borders" type="Node2D"]
+position = Vector2( -50, 0 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D"]
+position = Vector2( 5, 300 )
+shape = SubResource( 1 )
+
+[node name="Borders" type="ColorRect" parent="Node2D"]
+margin_right = 10.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
