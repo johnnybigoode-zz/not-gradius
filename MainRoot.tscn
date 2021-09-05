@@ -5,6 +5,7 @@
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://MainRoot.gd" type="Script" id=4]
 [ext_resource path="res://Borders.tscn" type="PackedScene" id=5]
+[ext_resource path="res://SmallerEnemy.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -53,4 +54,5 @@ position = Vector2( -300, 700 )
 
 [node name="Borders" parent="." instance=ExtResource( 5 )]
 
+[node name="SmallerEnemy" parent="." instance=ExtResource( 6 )]
 [connection signal="area_entered" from="Shooter/Area2D" to="Shooter" method="_on_Area2D_area_entered"]
